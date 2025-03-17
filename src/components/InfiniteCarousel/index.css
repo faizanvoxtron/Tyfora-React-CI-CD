@@ -1,0 +1,48 @@
+/* General Slider Styling */
+.slider {
+  width: 100%;
+  height: var(--height);
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.slider .list {
+  display: flex;
+  width: 100%;
+  min-width: calc(var(--width) * var(--quantity));
+  position: relative;
+}
+
+.slider .item {
+  width: var(--width);
+  height: auto;
+  position: absolute;
+  left: 100%;
+  display: flex;
+  align-items: stretch;
+  /* Animation will only be applied when the animate class is present */
+  animation: none;
+}
+
+/* Apply animation only when the slider has the animate class */
+.slider.animate .item {
+  animation: autoRun  var(--duration) linear infinite;
+  animation-delay: calc((var(--duration) / var(--quantity)) * (var(--position) - 1) - var(--duration)) !important;
+}
+
+.slider:hover .item {
+  animation-play-state: paused !important;
+  transition: left 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes autoRun {
+  from {
+    left: 100%;
+  }
+  to {
+    left: calc(var(--width) * -1);
+  }
+}
+
